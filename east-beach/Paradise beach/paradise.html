@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kanaka Durga Temple</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; text-decoration: none; }
+    body {
+      font-family: Arial, sans-serif;
+      color: #fff;
+      background: #000;
+      overflow-x: hidden;
+    }
+
+    /* Full-page background video */
+    .background-video {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: -1;
+    }
+
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.3); /* optional overlay */
+      z-index: -1;
+    }
+
+    /* View in Map Button */
+    .button {
+      position: absolute;
+      top: 500px; 
+      left: 600px; 
+      
+      background: #FC6400;
+      color: red;
+      padding: 12px 20px;
+      font-size: 1rem;
+      border: 2px solid #00fffc;
+      border-radius: 8px;
+      cursor: pointer;
+      text-decoration: none;
+      font-weight: bold;
+      transition: all 0.3s ease;
+      z-index: 1000;
+    }
+
+    .button:hover {
+      background: #00fffc;
+      color: #000;
+      transform: scale(1.1);
+      box-shadow: 0 0 20px #00fffc, 0 0 40px #00fffc;
+    }
+
+    .tourism-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10rem;
+      padding: 50px 20px;
+    }
+
+    .tourism-image video {
+      height: 500px;
+      width: 400px;
+      border-radius: 12px;
+      box-shadow: 0px 0px 50px #FC6400;
+       animation: glow 3s infinite alternate;
+       opacity: 1;
+       object-fit: cover;
+    }
+
+    .tourism-content {
+      flex: 1;
+      text-align: center;
+      max-width: 700px;
+      padding: 25px;
+      background: rgba(0, 0, 0, 0.6);
+      border-radius: 15px;
+      box-shadow: 0 0 20px #FC6400;
+      animation: glow 3s infinite alternate;
+    }
+
+    @keyframes glow {
+      from { box-shadow: 0 0 10px #FC6400; }
+      to { box-shadow: 0 0 30px #FC6400; }
+    }
+
+    h2 {
+      margin: 10px 0 20px;
+      text-shadow: 2px 2px 6px rgba(255, 255, 255, 0.5);
+      color: rgba(255, 255, 255, 0.9);
+    }
+
+    p {
+      font-size: 1.1rem;
+      line-height: 1.6;
+    }
+
+    .content {
+      position: relative;
+      z-index: 1;
+      padding: 40px;
+      text-align: center;
+    }
+
+    
+    .media-slider {
+      display: grid;
+      gap: 30px;
+      grid-template-columns: repeat(3,minmax(400px,2rem));
+      padding-left: 6rem;
+      
+      justify-content: center;
+      align-content: center;
+      align-items: center;
+    }
+    .media-video h2,.content h2{
+      text-align: center;
+      margin-bottom: 50px;
+      
+    }
+
+    .media-slider::-webkit-scrollbar { height: 10px; }
+    .media-slider::-webkit-scrollbar-thumb {
+      background: #888;
+      border-radius: 10px;
+    }
+    .media-slider video{
+      height: 600px;
+      width: 400px;
+      
+      flex-shrink: 0;
+      margin-bottom: 50px;
+      border-radius: 15px;
+      object-fit: fill;
+      
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.6);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .media-slider img
+     {
+      height: 600px;
+      width: 400px;
+      flex-shrink: 0;
+      margin-bottom: 50px;
+      border-radius: 15px;
+      background-size: cover;
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.6);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .media-slider img:hover
+     {
+      transform: scale(1.05);
+      box-shadow: 0 0 35px rgba(255, 255, 255, 1);
+    }
+    .media-slider video:hover{
+      transform: scale(1.05);
+      box-shadow: 0 0 35px rgba(255, 255, 255, 1);
+      
+    }
+
+    
+
+  .map-section {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 80%;
+  height: 70%;
+  transform: translate(-50%, -50%);
+  border-radius: 12px;
+  box-shadow: 0 0 30px #00fffc;
+  z-index: 2000;
+  overflow: hidden;
+}
+#map-toggle:checked ~ .map-section {
+  display: block;
+}
+
+
+    @keyframes glowPulse {
+      from {
+        box-shadow: 0 0 20px rgba(0,255,255,0.5),
+                    0 0 40px rgba(0,255,255,0.3);
+      }
+      to {
+        box-shadow: 0 0 40px rgba(0,255,255,1),
+                    0 0 60px rgba(0,255,255,0.7);
+      }
+    }
+    /* ✅ Back arrow styling - fixed (no blur) */
+    .back-arrow {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 1rem;
+      color: black;
+      background: rgba(255, 255, 255, 0.6);
+      padding: 10px 16px;
+      border-radius: 20px;
+      border: 1px solid rgba(255, 255, 255, 0.4); /* glassy look */
+      transition: all 0.3s ease;
+      z-index: 1;
+    }
+
+    .back-arrow:hover {
+      background: #66cc66;
+      color: white;
+      transform: translateY(-2px);
+      box-shadow: 0px 0px 10px rgba(102, 204, 102, 0.6),
+                  0px 0px 18px rgba(102, 204, 102, 0.4);
+    }
+  </style>
+</head>
+<body>
+  <!-- ✅ Back to Home arrow -->
+  <a href="/east-beach/east coast india.html" class="back-arrow">&#8592; back</a>
+  <!-- Background Video -->
+  <video autoplay muted loop class="background-video">
+    <source src="/beaches/para-main.mp4" type="video/mp4">
+  </video>
+  <div class="overlay"></div>
+ 
+  <!-- First Section -->
+  <section class="tourism-section">
+    <div class="tourism-container">
+      <div class="tourism-content">
+        <h2>paradise beach</h2>
+        <p>
+          Paradise Beach, also known as Plage Paradiso, is one of the most stunning and pristine beaches in Puducherry (Pondicherry), India.
+           Famous for its golden sandy shorelines, swaying coconut trees, and clear blue waters, it offers visitors a peaceful escape from the hustle and bustle of city life.
+        </p>
+      </div>
+      <div class="tourism-image">
+      <video  muted autoplay><source src="paradise-main.mp4" type="video/mp4"></video>
+      </div>
+    </div>
+  </section>
+
+  
+  <div class="content">
+    
+     <h2>Beach images</h2>
+    <div class="media-slider">
+      <img src="para.jpeg" alt="Temple 1">
+      <img src="download.jpeg" alt="Temple 2">
+      <img src="245a9254-bef3-4fa0-a191-efcb9964d0f4.jpeg" alt="Temple 3">
+      <img src="29a3c1c4-c833-4f80-8d9e-81233a671ee6.jpeg" alt="Temple 4">
+      <img src="29d8d173-82e4-4e84-9b77-d28639e3a12b.jpeg" alt="Temple 5">
+      <img src="7f8ff4f8-e1bc-444c-91c3-6480326d3a0c.jpeg" alt="Temple 6">
+      <img src="d022b188-1370-4e4b-af3b-93724c8ce7b4.jpeg" alt="Temple 7">
+      <img src="ec978d9e-2d14-4a7e-b6d1-5e0e892d3790.jpeg" alt="Temple 8">
+      <img src="Escape to paradise! Imagine yourself relaxing on….jpeg" alt="Temple 9">
+      <img src="paisagem bonita de praia feita com inteligência….jpeg" alt="Temple 10">
+    </div>
+  </div>
+    <div class="media-video">
+    <h2>Beach videos</h2>
+    <div class="media-slider">
+      <video  muted autoplay><source src="para1.mp4" type="video/mp4"></video>
+      <video  muted autoplay><source src="para2.mp4" type="video/mp4"></video>
+      <video  muted autoplay><source src="para3.mp4" type="video/mp4"></video>
+      <video  muted autoplay><source src="🌊 Paradise Found Gold Rock Beach, Bahamas ✨.mp4" type="video/mp4"></video>
+      
+    </div>
+  </div>
+
+  <!-- Hidden checkbox -->
+<input type="checkbox" id="map-toggle" hidden>
+
+<!-- View in Map Button -->
+ <div class="button">
+<a href="https://maps.app.goo.gl/mojNCiNS2reGx2me8" target="_blank">view in map</a>
+ </div>
+</body>
+</html>

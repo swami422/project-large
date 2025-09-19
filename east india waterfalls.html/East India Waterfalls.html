@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>East India Waterfalls</title>
+
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      width: 100%;
+      font-family: Arial, sans-serif;
+      
+    }
+
+    body {
+      color: white;
+      text-align: center;
+      overflow-x: hidden;
+    }
+
+    /* Background Video (fixed behind content) */
+    .video-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    /* Center Container */
+    .container {
+      position: relative;
+      z-index: 1;               /* above the video */
+      max-width: 700px;
+      margin: 40px auto;
+      padding: 25px;
+      background: rgba(0, 0, 0, 0.6);
+      border-radius: 15px;
+      box-shadow: 0 0 20px #00fffc;
+      animation: glow 3s infinite alternate;
+    }
+
+    @keyframes glow {
+      from { box-shadow: 0 0 10px #00fffc; }
+      to   { box-shadow: 0 0 30px #00fffc; }
+    }
+
+    h1 {
+      margin: 10px 0 20px;
+      text-shadow: 2px 2px 6px white;
+    }
+
+    p {
+      font-size: 1.1rem;
+      line-height: 1.6;
+    }
+
+    .gallery {
+      position: relative;
+      z-index: 1; /* above the video */
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 25px;
+      padding: 20px;
+      margin-bottom: 60px;
+    }
+
+    .card {
+      width: 240px;
+      border-radius: 12px;
+      overflow: hidden;
+      background: white;
+      color: black;
+      text-align: center;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+      transition: transform 0.3s ease;
+    }
+
+    .card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .card figcaption {
+      padding: 12px;
+      font-weight: bold;
+      font-size: 1rem;
+      text-transform: capitalize;
+    }
+
+    .card:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 20px #00fffc;
+    }
+
+    .back-arrow {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 1rem;
+      color: black;
+      background: rgba(255, 255, 255, 0.9);
+      padding: 10px 16px;
+      border-radius: 20px;
+      z-index: 2;
+    }
+
+   
+  </style>
+</head>
+<body>
+  <!-- ✅ Back to Home arrow -->
+  <a href="/waterfalls.html" class="back-arrow">&#8592; back</a>
+
+  <!-- Background Video: note class "video-bg" (fixed behind page) -->
+  <video autoplay muted loop playsinline class="video-bg">
+   <source src="/east india waterfalls.html/Nature Waterfalls - No Copyright Background Video.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+
+  <!-- Center Container -->
+  <div class="container">
+    <h1>East India Waterfalls</h1>
+    <p>
+      East India's waterfalls are natural treasures, especially across the Northeast.
+      Lush forests, towering drops and rich local legends define places like Meghalaya’s
+      Nohkalikai and Nohsngithiang (Seven Sisters), Mizoram’s Vantawng, and Assam’s Akashiganga.
+      These falls offer breathtaking views and a strong connection to the region’s vibrant ecosystem.
+    </p>
+  </div>
+
+  <!-- Gallery (cards sit above fixed background) -->
+  <div class="gallery">
+    <figure class="card">
+      <a href="Nohkalikai Falls.html">
+        <img src="Nohkalikai0.jpeg" alt="Nohkalikai Falls">
+        <figcaption>Nohkalikai Falls</figcaption>
+      </a>
+    </figure>
+
+    <figure class="card">
+      <a href="Nohsngithiang Falls.html">
+        <img src="Nohsngithiang0.jpeg" alt="Nohsngithiang Falls">
+        <figcaption>Nohsngithiang (Seven Sisters)</figcaption>
+      </a>
+    </figure>
+
+    <figure class="card">
+      <a href="Nuranang Falls.html">
+        <img src="Nuranang Falls0.jpeg" alt="Nuranang Falls">
+        <figcaption>Nuranang Falls</figcaption>
+      </a>
+    </figure>
+
+    <figure class="card">
+      <a href="Barehipani Falls.html">
+        <img src="Barehipani Falls0.jpeg" alt="Barehipani Falls">
+        <figcaption>Barehipani Falls</figcaption>
+      </a>
+    </figure>
+
+    <figure class="card">
+      <a href="Vantawng Falls.html">
+        <img src="Vantawng Falls0.jpeg" alt="Vantawng Falls">
+        <figcaption>Vantawng Falls</figcaption>
+      </a>
+    </figure>
+  </div>
+
+</body>
+</html>
