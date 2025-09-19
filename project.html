@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Explore India Tourism</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700&family=Permanent+Marker&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body, html {
+      height: 100%;
+      font-family: 'Montserrat', sans-serif;
+      scroll-behavior: smooth;
+    }
+
+    /* Sections */
+    .section {
+      position: relative;
+      width: 100%;
+      height: 100vh; /* full screen */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      margin-bottom: 0px;
+      margin-top: 0px;
+    }
+
+    /* Background Videos */
+    .video-bg {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: -1;
+    }
+
+    /* Navbar */
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      z-index: 10;
+      background: none;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 25px;
+      margin: 0;
+      padding: 15px 0;
+    }
+
+    nav ul li {
+      display: flex;
+      align-items: center;
+      position: relative;
+    }
+
+    nav ul li a,
+    label.profile-btn,.social-icons a {
+      color: black;
+      font-weight: 700;
+      text-decoration: none;
+      font-size: 1rem;
+      padding: 8px 18px;
+      border-radius: 25px;
+      background: rgba(255, 255, 255, 0.6);
+      backdrop-filter: blur(4px);
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+
+    nav ul li a:hover,
+    label.profile-btn:hover s,.social-icons a:hover {
+      background: #66cc66;
+      color: white;
+      transform: translateY(-3px) scale(1.05);
+      box-shadow: 0px 0px 10px rgba(102, 204, 102, 0.6),
+                  0px 0px 18px rgba(102, 204, 102, 0.4);
+      animation: softGlow 1s infinite alternate;
+    }
+
+    @keyframes softGlow {
+      from {
+        box-shadow: 0px 0px 8px rgba(102, 204, 102, 0.4),
+                    0px 0px 15px rgba(102, 204, 102, 0.3);
+      }
+      to {
+        box-shadow: 0px 0px 14px rgba(102, 204, 102, 0.7),
+                    0px 0px 22px rgba(102, 204, 102, 0.5);
+      }
+    }
+
+    /* Search bar */
+    .search-bar {
+      padding: 8px 14px;
+      border: none;
+      border-radius: 25px;
+      font-size: 0.95rem;
+      background: rgba(10, 10, 10, 0.6);
+      backdrop-filter: blur(4px);
+      outline: none;
+      transition: all 0.3s ease;
+    }
+
+    .search-bar:focus {
+      background: white;
+      box-shadow: 0px 4px 10px rgba(0,0,0,0.2);
+    }
+
+    /* Hero Text */
+    .hero-text {
+      position: relative;
+      z-index: 1;
+      font-family: 'Permanent Marker', cursive;
+    }
+
+    .hero-text h1 {
+      font-size: 4.5rem;
+      color: black;
+      text-shadow: 2px 2px 8px rgba(255, 255, 255, 0.6);
+      animation: fadeIn 2s ease-in-out;
+    }
+
+    /* Second section content */
+    .section-content {
+      position: relative;
+      z-index: 1;
+      max-width: 800px;
+      border-radius: 4px;
+      background: rgba(0,0,0,0.5);
+      padding: 30px;
+      border-radius: 15px;
+      color: white;
+    }
+
+    /* Social Media Icons */
+    .social-icons {
+      position: fixed;
+      top: 50%;
+      left: 30px;
+      transform: translateY(-50%);
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      z-index:10;
+      
+    }
+
+    .social-icons a {
+      color:black ;
+      font-size: 1.5rem;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      border:2px black solid;
+      height: auto;
+      width: auto;
+      text-align: center;
+      border-radius: 50% ;
+      padding: 5px;
+    }
+
+    .social-icons a:hover {
+      color: black;
+      transform: scale(1.2);
+    }
+
+    /* Fade animation */
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    /* Footer */
+    .foot {
+      position: relative;
+      bottom: 0;
+      width: 100%;
+      text-align: center;
+      font-size: 0.9rem;
+      background: rgba(0, 0, 0, 0.3);
+      padding: 10px;
+      color: #fff;
+      backdrop-filter: blur(6px);
+    }
+
+    /* Profile toggle */
+    #profileToggle {
+      display: none;
+    }
+
+    .profile-box {
+      position: absolute;
+      top: 50px;
+      right: 0;
+      background: rgba(255, 255, 255, 0.95);
+      padding: 15px 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      display: none;
+      text-align: center;
+      min-width: 180px;
+      font-weight: bold;
+    }
+
+    .profile-box p {
+      margin: 0 0 10px;
+      color: black;
+    }
+
+    .profile-box a {
+      display: inline-block;
+      padding: 8px 15px;
+      background: #ff9933;
+      border-radius: 6px;
+      color: white;
+      font-weight: bold;
+      text-decoration: none;
+      transition: 0.3s;
+    }
+
+    .profile-box a:hover {
+      background: #cc7a00;
+    }
+
+    #profileToggle:checked + label + .profile-box {
+      display: block;
+    }
+   .content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  color: white;
+  opacity: 0;
+  animation: fadeInOut 7s ease forwards;
+  max-width: 800px;
+  padding: 20px;
+}
+
+/* Each one lasts 7s. First starts after 5s */
+.content1 { animation-delay: 11s; }   /* Starts after 5 seconds */
+.content2 { animation-delay: 12s; } /* 5 + 7 = 12s */
+.content3 { animation-delay: 19s; } /* 12 + 7 = 19s */
+.content4 { animation-delay: 26s; } /* 19 + 7 = 26s */
+.content5 { animation-delay: 33s; } /* 26 + 7 = 33s */
+
+.content h1 {
+  font-size: 3rem;
+  margin-bottom: 15px;
+}
+
+.content p {
+  font-size: 1.2rem;
+  line-height: 1.6;
+}
+
+/* Fade In and Out */
+@keyframes fadeInOut {
+  0% { opacity: 0; }
+  10% { opacity: 1; }
+  80% { opacity: 1; }
+  100% { opacity: 0; }
+}
+.tourism-section {
+  padding:160px;
+  background: #f9f9f9;
+  margin-top: 0px;
+}
+
+.tourism-container {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+}
+
+.tourism-image img {
+  width: 500px;
+  max-width: 100%;
+  border-radius: 12px;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+}
+
+.tourism-content {
+  flex: 1;
+}
+
+.tourism-content h2 {
+  font-size: 2.2rem;
+  margin-bottom: 20px;
+  color: #222;
+}
+
+.tourism-content p {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: #555;
+}
+/* Add clear gap between sections */
+
+
+/* Simple animation on load (optional) */
+.section {
+  opacity: 0;
+  transform: translateY(40px);
+  animation: fadeInUp 1.5s ease forwards;
+}
+
+.section:nth-of-type(1) { animation-delay: 0.3s; }
+.section:nth-of-type(2) { animation-delay: 0.8s; }
+.section:nth-of-type(3) { animation-delay: 1.3s; }
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(40px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+
+
+
+  </style>
+</head>
+<body>
+     <!-- Navbar -->
+      <div class="header">
+    <nav>
+      <ul>
+        <li><a href="project.html" target="_self">Home</a></li>
+        <li><a href="temples.html" target="_self">Temples</a></li>
+        <li><a href="beach.html" target="_self">Beaches</a></li>
+        <li><a href="waterfalls.html" target="_self">Waterfalls</a></li>
+        <li><a href="about-us.html" target="_self">About Us</a></li>
+        <li><input type="text" placeholder="Search..." class="search-bar"></li>
+        <li><a href="signin.html" target="_self">Sign In</a></li>
+        <li><a href="signup.html" target="_self">Sign Up</a></li>
+        <li>
+          <input type="checkbox" id="profileToggle">
+          <label for="profileToggle" class="profile-btn">Profile</label>
+          <div class="profile-box">
+            <p>Welcome, RAGE YERRISWAMI</p>
+            <a href="signin.html">Logout</a>
+          </div>
+        </li>
+      </ul>
+    </nav>
+    </div>
+    <!-- Social Media Sidebar -->
+    <div class="social-icons">
+      <a href="https://facebook.com" target="_blank"><i class="fab fa-facebook-f"></i></a>
+      <a href="https://instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
+      <a href="https://twitter.com" target="_blank"><i class="fab fa-twitter"></i></a>
+      <a href="https://chat.whatsapp.com/GezHy4iO5P3DKDo3kbVo0H" target="_blank"><i class="fab fa-whatsapp"></i></a>
+    </div>
+
+  <!-- First Section -->
+  <section class="section">
+    <video autoplay muted loop class="video-bg">
+      <source src="homepage-background.mp4" type="video/mp4">
+      Your browser does not support HTML5 video.
+    </video>
+
+   
+    
+
+    <!-- Hero Text -->
+    <div class="hero-text">
+      <h1>Explore India Tourism</h1>
+    </div>
+  </section>
+
+  <!-- Second Section -->
+  <section class="section">
+    <video autoplay  loop class="video-bg">
+      <source src="videobackground.mp4" type="video/mp4">
+    </video>
+
+    <!-- Inside your second video section -->
+<div class="content">
+  <h1>Explore Incredible India</h1>
+  <p>
+    Discover the diverse beauty of India — from the Himalayan peaks to the tropical beaches, 
+    from ancient temples to bustling cities. Every journey offers a new story, 
+    every place a timeless memory.
+  </p>
+</div>
+<div class="content content2">
+  <h1>Heritage & Culture</h1>
+  <p>Experience centuries-old traditions, grand palaces, temples, and colorful festivals.</p>
+</div>
+
+<div class="content content3">
+  <h1>Adventure Awaits</h1>
+  <p>Enjoy trekking in the Himalayas, desert safaris in Rajasthan, and river rafting in Rishikesh.</p>
+</div>
+
+<div class="content content4">
+  <h1>Cuisine of India</h1>
+  <p>From spicy street food to royal feasts, India offers a rich culinary journey for every taste.</p>
+</div>
+
+<div class="content content5">
+  <h1>Timeless Journeys</h1>
+  <p>Every state tells a story — explore, connect, and create memories for a lifetime.</p>
+</div>
+
+
+  </section>
+  <!-- Third Section: India Tourism with Image -->
+<section class="tourism-section">
+  <div class="tourism-container">
+    <div class="tourism-image">
+      <img src="india-map-background.jpeg" alt="India Tourism" />
+    </div>
+    <div class="tourism-content">
+      <h2>Explore Incredible India</h2>
+      <p>
+        India is a land of diverse cultures, ancient heritage, and breathtaking
+        landscapes. From the Himalayan peaks to tropical beaches, from the Taj
+        Mahal to vibrant festivals, every corner of India tells a unique story.
+        Discover its traditions, spirituality, and the warmth of its people.
+      </p>
+    </div>
+     <!-- Social Media Sidebar -->
+    
+  </div>
+ 
+</section>
+
+
+  <!-- Footer -->
+  <footer class="foot">
+    <p>&copy; 2025 Explore India Tourism. All Rights Reserved.</p>
+  </footer>
+</body>
+</html>
