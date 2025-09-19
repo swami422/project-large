@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>jog waterfalls</title>
+  <style>
+     * { margin: 0; padding: 0; box-sizing: border-box; text-decoration: none; }
+    body {
+      font-family: Arial, sans-serif;
+      color: #fff;
+      background: #000;
+      overflow-x: hidden;
+    }
+
+    /* Full-page background video */
+    .background-video {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: -1;
+    }
+
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.3); /* optional overlay */
+      z-index: -1;
+    }
+
+    /* View in Map Button */
+    .button {
+      position: absolute;
+      top: 500px; 
+      left: 600px; 
+      
+      background: #FC6400;
+      color: red;
+      padding: 12px 20px;
+      font-size: 1rem;
+      border: 2px solid #00fffc;
+      border-radius: 8px;
+      cursor: pointer;
+      text-decoration: none;
+      font-weight: bold;
+      transition: all 0.3s ease;
+      z-index: 1000;
+    }
+
+    .button:hover {
+      background: #00fffc;
+      color: #000;
+      transform: scale(1.1);
+      box-shadow: 0 0 20px #00fffc, 0 0 40px #00fffc;
+    }
+
+    .tourism-container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10rem;
+      padding: 50px 20px;
+    }
+
+    .tourism-image video {
+      height: 500px;
+      width: 400px;
+      border-radius: 12px;
+      box-shadow: 0px 0px 50px black;
+       animation: glow 3s infinite alternate;
+       opacity: 0.8;
+       object-fit: cover;
+    }
+
+    .tourism-content {
+      flex: 1;
+      text-align: center;
+      max-width: 700px;
+      padding: 25px;
+      background: rgba(0, 0, 0, 0.6);
+      border-radius: 15px;
+      box-shadow: 0 0 20px black;
+      animation: glow 3s infinite alternate;
+    }
+
+    @keyframes glow {
+      from { box-shadow: 0 0 10px black; }
+      to { box-shadow: 0 0 30px black; }
+    }
+
+    h2 {
+      margin: 10px 0 20px;
+      text-shadow: 2px 2px 6px rgba(255, 255, 255, 0.5);
+      color: black;
+    }
+
+    p {
+      font-size: 1.1rem;
+      line-height: 1.6;
+    }
+
+    .content {
+      position: relative;
+      z-index: 1;
+      padding: 40px;
+      text-align: center;
+    }
+
+    
+    .media-slider {
+      display: grid;
+      gap: 30px;
+      grid-template-columns: repeat(3,minmax(400px,2rem));
+      padding-left: 6rem;
+      
+      justify-content: center;
+      align-content: center;
+      align-items: center;
+    }
+    .media-video h2,.content h2{
+      text-align: center;
+      margin-bottom: 50px;
+      
+    }
+
+    .media-slider::-webkit-scrollbar { height: 10px; }
+    .media-slider::-webkit-scrollbar-thumb {
+      background: #888;
+      border-radius: 10px;
+    }
+    .media-slider video{
+      height: 600px;
+      width: 400px;
+      
+      flex-shrink: 0;
+      margin-bottom: 50px;
+      border-radius: 15px;
+      object-fit: fill;
+      
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.6);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .media-slider img
+     {
+      height: 600px;
+      width: 400px;
+      flex-shrink: 0;
+      margin-bottom: 50px;
+      border-radius: 15px;
+      background-size: cover;
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.6);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .media-slider img:hover
+     {
+      transform: scale(1.05);
+      box-shadow: 0 0 35px rgba(255, 255, 255, 1);
+    }
+    .media-slider video:hover{
+      transform: scale(1.05);
+      box-shadow: 0 0 35px rgba(255, 255, 255, 1);
+      
+    }
+
+    
+
+  .map-section {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 80%;
+  height: 70%;
+  transform: translate(-50%, -50%);
+  border-radius: 12px;
+  box-shadow: 0 0 30px #00fffc;
+  z-index: 2000;
+  overflow: hidden;
+}
+#map-toggle:checked ~ .map-section {
+  display: block;
+}
+
+
+    @keyframes glowPulse {
+      from {
+        box-shadow: 0 0 20px rgba(0,255,255,0.5),
+                    0 0 40px rgba(0,255,255,0.3);
+      }
+      to {
+        box-shadow: 0 0 40px rgba(0,255,255,1),
+                    0 0 60px rgba(0,255,255,0.7);
+      }
+    }
+    /* ✅ Back arrow styling - fixed (no blur) */
+    .back-arrow {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 1rem;
+      color: black;
+      background: rgba(255, 255, 255, 0.6);
+      padding: 10px 16px;
+      border-radius: 20px;
+      border: 1px solid rgba(255, 255, 255, 0.4); /* glassy look */
+      transition: all 0.3s ease;
+      z-index: 1;
+    }
+
+    .back-arrow:hover {
+      background: #66cc66;
+      color: white;
+      transform: translateY(-2px);
+      box-shadow: 0px 0px 10px rgba(102, 204, 102, 0.6),
+                  0px 0px 18px rgba(102, 204, 102, 0.4);
+    }
+  </style>
+</head>
+<body>
+ <!-- ✅ Back to Home arrow -->
+  <a href="/west-waterfalls/west-india-waterfalls.html" class="back-arrow">&#8592; back</a>
+  <!-- Background Video -->
+  <video autoplay muted loop class="background-video">
+    <source src="/south-waterfalls/Simple wedding peach blossom Falling flower background video.mp4" type="video/mp4">
+  </video>
+  <div class="overlay"></div>
+ 
+  <!-- First Section -->
+  <section class="tourism-section">
+    <div class="tourism-container">
+      <div class="tourism-content">
+    <h1>jog waterfall</h1>
+
+    <!-- History Content -->
+    <p>
+    Jog Falls in Karnataka, Athirappilly in Kerala, and Hogenakkal on the Tamil Nadu–Karnataka border are among the most famous.
+     These waterfalls are not just natural wonders but also popular tourist attractions, offering trekking, boating, and breathtaking views.
+    </p>
+     </div>
+      <div class="tourism-image">
+      <video  muted autoplay><source src="jog1.mp4" type="video/mp4"></video>
+      </div>
+    </div>
+  </section>
+    <div class="content">
+    <h2>waterfall images</h2>
+
+    <!-- Temple Images -->
+    <div class="media-slider">
+      
+      <img src="jog1.jpeg" alt="Temple 2">
+      <img src="jog2.jpeg" alt="Temple 4">
+      <img src="jog3.jpeg" alt="Temple 5">
+      <img src="jog4.jpeg" alt="Temple 6">
+      <img src="jog5.jpeg" alt="Temple 7">
+      <img src="jog6.jpeg" alt="Temple 8">
+      <img src="jog7.jpeg" alt="Temple 8">
+      <img src="jog8.jpeg" alt="Temple 8">
+    </div>
+      
+     
+    </div>
+
+   <div class="media-video">
+    
+<!-- Temple Videos -->
+<h2>waterfall Videos</h2>
+<div class="media-slider">
+  <video controls   muted>
+    <source src="jog1.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+  <video controls  muted>
+    <source src="jog2.mp4" type="video/mp4">
+  </video>
+  <video controls  muted>
+    <source src="jog3.mp4" type="video/mp4">
+  </video>
+  <video controls  muted>
+    <source src="jog4.mp4" type="video/mp4">
+  </video>
+  <video controls  muted>
+    <source src="jog5.mp4" type="video/mp4">
+  </video>
+  <video controls  muted>
+    <source src="jog6.mp4" type="video/mp4">
+  </video>
+</div>
+</div>
+
+<!-- Hidden checkbox -->
+<input type="checkbox" id="map-toggle" hidden>
+
+<!-- View in Map Button -->
+ <div class="button">
+<a href="https://maps.app.goo.gl/HNMQvfWx32rxwEBq7" target="_blank">view in map</a>
+ </div>
+</body>
+</html>
