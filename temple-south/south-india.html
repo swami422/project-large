@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>South India Temples</title>
+  <style>
+    *{
+      text-decoration: none;
+    }
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      width: 100%;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      color: white;
+      text-align: center;
+      overflow-x: hidden;
+    }
+
+    /* Background Video */
+    .video-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: -1;
+    }
+
+    /* Center Container */
+    .container {
+      max-width: 700px;
+      margin: 40px auto;
+      padding: 25px;
+      background: rgba(0, 0, 0, 0.6);
+      border-radius: 15px;
+      box-shadow: 0 0 20px #00fffc;
+      animation: glow 3s infinite alternate;
+    }
+
+    @keyframes glow {
+      from { box-shadow: 0 0 10px #00fffc; }
+      to { box-shadow: 0 0 30px #00fffc; }
+    }
+
+    h1 {
+      margin: 10px 0 20px;
+      text-shadow: 2px 2px 6px white;
+    }
+
+    p {
+      font-size: 1.1rem;
+      line-height: 1.6;
+    }
+
+    /* Gallery around container */
+    .gallery {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 25px;
+      padding: 20px;
+    }
+
+    .card {
+      width: 240px;
+      border-radius: 12px;
+      overflow: hidden;
+      background: white;
+      color: black;
+      text-align: center;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+      transition: transform 0.3s ease;
+    }
+
+    .card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+
+    .card figcaption {
+      padding: 12px;
+      font-weight: bold;
+      font-size: 1rem;
+    }
+
+    .card:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 20px #00fffc;
+    }
+
+    .back-arrow {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 1rem;
+      color: black;
+      background: rgba(255, 255, 255, 0.7);
+      padding: 10px 16px;
+      border-radius: 20px;
+    }
+  </style>
+</head>
+<body>
+   <a href="../temples.html" class="back-arrow">&#8592; back</a>
+  <!-- Background Video -->
+  <video autoplay muted loop playsinline class="video-bg">
+    <source src="backgroun-for-south.mp4" type="video/mp4">
+    Your browser does not support HTML5 video.
+  </video>
+
+ 
+
+  <!-- Center Container -->
+  <div class="container">
+    <h1>South India Temples</h1>
+    <p>
+      South India is home to some of the most magnificent temples in the world. 
+      Known for their towering gopurams, intricate carvings, and rich history, 
+      these temples are not only spiritual centers but also marvels of art and architecture. 
+      From the sacred hills of Tirumala to the vibrant shrines of Vijayawada, 
+      each temple carries centuries of devotion and cultural heritage.
+    </p>
+  </div>
+
+  <!-- Gallery Around -->
+  <div class="gallery">
+    <figure class="card">
+      <a href="kanakadurga.html">
+        <img src="Vijayawada Kanakadurga Temple.jpg" alt="Kanaka Durga Temple">
+        <figcaption>Kanaka Durga Temple</figcaption>
+      </a>
+    </figure>
+
+    <figure class="card">
+      <a href="srikalahasthi.html">
+        <img src="srikalahasthi.jpg" alt="Srikalahasti Temple">
+        <figcaption>Srikalahasti Temple</figcaption>
+      </a>
+    </figure>
+
+    <figure class="card">
+      <a href="tirupathi.html">
+        <img src="tirupathi.jpg" alt="Tirupati Temple">
+        <figcaption>Tirumala Tirupati Temple</figcaption>
+      </a>
+    </figure>
+    <figure class="card">
+      <a href="Arunachalam.html">
+        <img src="arunachalam-1.jpeg" alt="arunachalam Temple">
+        <figcaption>Arunachalam Temple</figcaption>
+      </a>
+    </figure>
+  </div>
+</body>
+</html>
